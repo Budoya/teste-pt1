@@ -1,0 +1,151 @@
+/* ===== ESTILOS GERAIS ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px 0; /* Margem externa para o body */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px; /* Padding lateral para mobile */
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px; /* Aumentado */
+    font-weight: 600;
+}
+
+/* ===== CARD DE UPLOAD ===== */
+.upload-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 40px; /* Aumentado */
+    margin: 0 auto 40px; /* Centralizado + margem inferior */
+    width: 100%;
+    max-width: 600px; /* Limita largura */
+}
+
+/* Campos do formulário */
+.form-group {
+    margin-bottom: 25px; /* Aumentado */
+}
+
+.form-label {
+    font-weight: 500;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 8px; /* Aumentado */
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Botão */
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    border: none;
+    padding: 14px 20px; /* Aumentado */
+    font-weight: 500;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px; /* Adicionado */
+}
+
+/* Pré-visualização */
+.media-preview-container {
+    margin: 30px auto 0; /* Centralizado + margem superior */
+    text-align: center;
+}
+
+.media-preview {
+    max-width: 100%;
+    max-height: 400px; /* Limitador para não ficar gigante */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== UPLOADS ANTERIORES ===== */
+.uploads-title {
+    text-align: center;
+    margin: 50px 0 30px; /* Margens aumentadas */
+    color: #2c3e50;
+}
+
+.uploads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px; /* Aumentado */
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.upload-item {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+}
+
+.upload-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.upload-item-thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.upload-item-description {
+    padding: 15px;
+    font-size: 14px;
+    color: #555;
+    border-top: 1px solid #eee;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .upload-card {
+        padding: 30px 20px; /* Reduz padding em mobile */
+    }
+
+    .uploads-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+}
