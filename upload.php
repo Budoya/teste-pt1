@@ -5,27 +5,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'] ?? '';
     $uploadDir = 'uploads/';
 
-    // Verifica se o arquivo foi enviado
-    if (isset($_FILES['mediaFile'])) {  // Corrigido: adicionado o parêntese faltante
-        $file = $_FILES['mediaFile'];
-        $fileName = uniqid() . '_' . basename($file['name']);
-        $targetPath = $uploadDir . $fileName;
-    
-
-        // Move o arquivo para a pasta 'uploads'
-        if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-            // Insere no banco de dados
-            $stmt = $pdo->prepare("
-                INSERT INTO uploads (file_name, file_path, description)
-                VALUES (?, ?, ?)
-            ");
-            $stmt->execute([$fileName, $targetPath, $description]);}
-
-            header('Location: index.php?success=1'); // Redireciona após sucesso
-            exit;
-        }
-    
+    if (!file_exists($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
     }
 
-header('Location: index.php?error=1'); // Se falhar
+    if (isset($_FILES['mediaFile'])) {
+        $file = $_FILES['mediaFile'];
+        $fileName = uniqid() . '_' . preg_replace('/[^a-zA-Z0-9\.\-_]/', '', $file['name']);
+        $targetPath = $uploadDir . $fileName;
+
+        $allowedTypes = [
+            'image/jpeg', 'image/png', 'image/gif', 
+            'video/mp4', 'video/webm', 'video/ogg'
+        ];
+
+        $fileType = mime_content_type($file['tmp_name']);
+
+        if (in_array($fileType, $allowedTypes)) {
+            if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+                $stmt = $pdo->prepare("
+                    INSERT INTO uploads (file_name, file_path, description)
+                    VALUES (?, ?, ?)
+                ");
+                $stmt->execute([$fileName, $targetPath, $description]);
+                header('Location: index.php?success=1');
+                exit;
+            }
+        }
+    }
+}
+
+header('Location: index.php?error=1');
 ?>
